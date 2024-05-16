@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common import NoSuchElementException
 
 
-class BaseClass:
+class BasePage:
     def __init__(self, browser):
         self.browser = browser
 
