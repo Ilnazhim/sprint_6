@@ -22,6 +22,7 @@ class TestOrders:
             mp.click_btn_header_order()
         with allure.step("Заполнение формы заказа и заказ товара"):
             op.fill_form_order_black_samocat(phone)
+            op.check_success_order()
 
     @pytest.mark.parametrize('phone', data.phone)
     @allure.title("Создание заказа из кнопки снизу страницы с серым самокатом")
@@ -37,3 +38,4 @@ class TestOrders:
             mp.click_btn_footer_order()
         with allure.step("Заполнение формы заказа и заказ товара"):
             op.fill_form_order_grey_samocat(phone)
+            op.check_success_order()

@@ -2,11 +2,11 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from base.base_page import BaseClass
+from base.base_page import BasePage
 from src import data
 
 
-class OrderPage(BaseClass):
+class OrderPage(BasePage):
 
     # Locators
     input_name = "//input[@placeholder='* Имя']"
@@ -24,13 +24,15 @@ class OrderPage(BaseClass):
     btn_next = "//button[text()='Далее']"
     btn_make_order = "//button[@class='Button_Button__ra12g Button_Middle__1CSJM']"
     btn_accept_order = "//button[text()='Да']"
+    assert_success_text = "//div[@class='Order_ModalHeader__3FDaJ']"
 
     # Getters
     def get_input_name(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_name)))
+        return self.get_element(By.XPATH, self.input_name)
 
     def get_input_surname(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_surname)))
+        return self.get_element(By.XPATH, self.input_surname)
+        # return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_surname)))
 
     def get_input_address(self):
         return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_address)))
@@ -119,35 +121,36 @@ class OrderPage(BaseClass):
 
     # Metods
     def fill_form_order_black_samocat(self, phone):
-        with allure.step("Заполение формы заказа с черным самокатом"):
-            self.input_input_name()
-            self.input_input_surname()
-            self.input_input_address()
-            self.click_open_list_metro_station()
-            self.click_select_metro_station()
-            self.input_input_phone(phone)
-            self.click_btn_next()
-            self.input_input_date_arrival()
-            self.click_open_menu_time()
-            self.click_select_time_order()
-            self.click_black_color()
-            self.input_input_comment()
-            self.click_btn_make_order()
-            self.click_btn_accept_order()
+        self.input_input_name()
+        self.input_input_surname()
+        self.input_input_address()
+        self.click_open_list_metro_station()
+        self.click_select_metro_station()
+        self.input_input_phone(phone)
+        self.click_btn_next()
+        self.input_input_date_arrival()
+        self.click_open_menu_time()
+        self.click_select_time_order()
+        self.click_black_color()
+        self.input_input_comment()
+        self.click_btn_make_order()
+        self.click_btn_accept_order()
 
     def fill_form_order_grey_samocat(self, phone):
-        with allure.step("Заполение формы заказа с серым самокатом"):
-            self.input_input_name()
-            self.input_input_surname()
-            self.input_input_address()
-            self.click_open_list_metro_station()
-            self.click_select_metro_station()
-            self.input_input_phone(phone)
-            self.click_btn_next()
-            self.input_input_date_arrival()
-            self.click_open_menu_time()
-            self.click_select_time_order()
-            self.click_black_color()
-            self.input_input_comment()
-            self.click_btn_make_order()
-            self.click_btn_accept_order()
+        self.input_input_name()
+        self.input_input_surname()
+        self.input_input_address()
+        self.click_open_list_metro_station()
+        self.click_select_metro_station()
+        self.input_input_phone(phone)
+        self.click_btn_next()
+        self.input_input_date_arrival()
+        self.click_open_menu_time()
+        self.click_select_time_order()
+        self.click_black_color()
+        self.input_input_comment()
+        self.click_btn_make_order()
+        self.click_btn_accept_order()
+
+    def check_success_order(self):
+        self.is_element_present(By.XPATH, self.assert_success_text)

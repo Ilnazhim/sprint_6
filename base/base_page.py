@@ -8,23 +8,28 @@ class BasePage:
         self.browser = browser
 
     def open(self, url):
-        """Metod open browser"""
+        """Method open browser"""
         self.browser.get(url)
         self.url = url
 
+    def get_element(self, how, variable):
+        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((how, variable)))
+
+
     def get_current_url(self):
-        """Metod get current url"""
+        """Method get current url"""
         return self.browser.current_url
 
     @staticmethod
     def assert_word(word, result):
-        """Metod assert word"""
+        """Method assert word"""
         value_word = word.text
         value_result = result
+        print(value_word)
         assert value_word == value_result
 
     def is_element_present(self, how, what):
-        """Metod is element present"""
+        """Method is element present"""
         try:
             WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((how, what)))
         except NoSuchElementException:
@@ -32,6 +37,6 @@ class BasePage:
         return True
 
     def assert_url(self, result):
-        """Metod assert url"""
+        """Method assert url"""
         get_url = self.browser.current_url
         assert get_url == result
