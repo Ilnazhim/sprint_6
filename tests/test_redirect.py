@@ -11,21 +11,19 @@ class TestRedirect:
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на кнопку лого Самокат"):
             mp.click_logo_link_to_main_page()
         with allure.step("Открылась главная страница самоката"):
-            mp.assert_url("https://qa-scooter.praktikum-services.ru/")
+            mp.assert_url(urls.URL)
 
     @allure.title("Переход на главную страницу Дзен при нажатии на лого Яндекс")
     def test_go_to_yandex_from_logo(self, browser):
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на кнопку лого Яндекс"):
             mp.click_logo_link_to_yandex()
         with allure.step("Переход на новую вкладку"):
             browser.switch_to.window(browser.window_handles[1])
         with allure.step("Открылась страница яндекс Дзен"):
-            mp.assert_url("https://dzen.ru/?yredirect=true")
+            mp.assert_url(urls.URL_DZEN)

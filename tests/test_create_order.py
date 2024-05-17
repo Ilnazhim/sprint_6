@@ -15,14 +15,14 @@ class TestOrders:
             mp = MainPage(browser)
             op = OrderPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на кнопку Заказать в хедере страницы"):
             mp.click_btn_header_order()
         with allure.step("Заполнение формы заказа и заказ товара"):
             op.fill_form_order_black_samocat(phone)
-            op.check_success_order()
+        with allure.step("Сравнение ФР и ОР"):
+            op.assert_success_order()
 
     @pytest.mark.parametrize('phone', data.phone)
     @allure.title("Создание заказа из кнопки снизу страницы с серым самокатом")
@@ -31,11 +31,11 @@ class TestOrders:
             mp = MainPage(browser)
             op = OrderPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на кнопку Заказать внизу страницы"):
             mp.click_btn_footer_order()
         with allure.step("Заполнение формы заказа и заказ товара"):
             op.fill_form_order_grey_samocat(phone)
-            op.check_success_order()
+        with allure.step("Сравнение ФР и ОР"):
+            op.assert_success_order()

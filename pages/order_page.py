@@ -1,7 +1,4 @@
-import allure
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from base.base_page import BasePage
 from src import data
 
@@ -9,148 +6,100 @@ from src import data
 class OrderPage(BasePage):
 
     # Locators
-    input_name = "//input[@placeholder='* Имя']"
-    input_surname = "//input[@placeholder='* Фамилия']"
-    input_address = "//input[@placeholder='* Адрес: куда привезти заказ']"
-    open_list_metro_station = "//input[@placeholder='* Станция метро']"
-    select_metro_station = "//li[@data-value='1']"
-    input_phone = "//input[@placeholder='* Телефон: на него позвонит курьер']"
-    input_date_arrival = "//input[@placeholder='* Когда привезти самокат']"
-    open_menu_time = "//span[@class='Dropdown-arrow']"
-    select_time_order = "//div[text()='сутки']"
-    black_color = "//input[@id='black']"
-    grey_color = "//input[@id='grey']"
-    input_comment = "//input[@placeholder='Комментарий для курьера']"
-    btn_next = "//button[text()='Далее']"
-    btn_make_order = "//button[@class='Button_Button__ra12g Button_Middle__1CSJM']"
-    btn_accept_order = "//button[text()='Да']"
-    assert_success_text = "//div[@class='Order_ModalHeader__3FDaJ']"
+    input_name = By.XPATH, "//input[@placeholder='* Имя']"
+    input_surname = By.XPATH, "//input[@placeholder='* Фамилия']"
+    input_address = By.XPATH, "//input[@placeholder='* Адрес: куда привезти заказ']"
+    open_list_metro_station = By.XPATH, "//input[@placeholder='* Станция метро']"
+    select_metro_station = By.XPATH, "//li[@data-value='1']"
+    input_phone = By.XPATH, "//input[@placeholder='* Телефон: на него позвонит курьер']"
+    input_date_arrival = By.XPATH, "//input[@placeholder='* Когда привезти самокат']"
+    open_menu_time = By.XPATH, "//span[@class='Dropdown-arrow']"
+    select_time_order = By.XPATH, "//div[text()='сутки']"
+    black_color = By.XPATH, "//input[@id='black']"
+    grey_color = By.XPATH, "//input[@id='grey']"
+    input_comment = By.XPATH, "//input[@placeholder='Комментарий для курьера']"
+    btn_next = By.XPATH, "//button[text()='Далее']"
+    btn_make_order = By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM']"
+    btn_accept_order = By.XPATH, "//button[text()='Да']"
+    assert_success_text = By.XPATH, "//div[@class='Order_ModalHeader__3FDaJ']"
 
-    # Getters
-    def get_input_name(self):
-        return self.get_element(By.XPATH, self.input_name)
+    def input_input_name(self, name):
+        self.enter_element(self.input_name, name)
 
-    def get_input_surname(self):
-        return self.get_element(By.XPATH, self.input_surname)
-        # return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_surname)))
+    def input_input_surname(self, surname):
+        self.enter_element(self.input_surname, surname)
 
-    def get_input_address(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_address)))
-
-    def get_open_list_metro_station(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.open_list_metro_station)))
-
-    def get_select_metro_station(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_metro_station)))
-
-    def get_input_phone(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_phone)))
-
-    def get_input_date_arrival(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_date_arrival)))
-
-    def get_open_menu_time(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.open_menu_time)))
-
-    def get_select_time_order(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_time_order)))
-
-    def get_black_color(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.black_color)))
-
-    def get_grey_color(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.grey_color)))
-
-    def get_input_comment(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_comment)))
-
-    def get_btn_next(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.btn_next)))
-
-    def get_btn_make_order(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.btn_make_order)))
-
-    def get_btn_accept_order(self):
-        return WebDriverWait(self.browser, 30).until(EC.element_to_be_clickable((By.XPATH, self.btn_accept_order)))
-
-    # Actions
-    def input_input_name(self):
-        self.get_input_name().send_keys(data.name)
-
-    def input_input_surname(self):
-        self.get_input_surname().send_keys(data.surname)
-
-    def input_input_address(self):
-        self.get_input_address().send_keys(data.address)
+    def input_input_address(self, address):
+        self.enter_element(self.input_address, address)
 
     def click_open_list_metro_station(self):
-        self.get_open_list_metro_station().click()
+        self.click_element(self.open_list_metro_station)
 
     def click_select_metro_station(self):
-        self.get_select_metro_station().click()
+        self.click_element(self.select_metro_station)
 
     def input_input_phone(self, phone):
-        self.get_input_phone().send_keys(phone)
+        self.enter_element(self.input_phone, phone)
 
-    def input_input_date_arrival(self):
-        self.get_input_date_arrival().send_keys(data.date_arrival)
+    def input_input_date_arrival(self, date_arrival):
+        self.enter_element(self.input_date_arrival, date_arrival)
 
     def click_open_menu_time(self):
-        self.get_open_menu_time().click()
+        self.click_element(self.open_menu_time)
 
     def click_select_time_order(self):
-        self.get_select_time_order().click()
+        self.click_element(self.select_time_order)
 
     def click_black_color(self):
-        self.get_black_color().click()
+        self.click_element(self.black_color)
 
     def click_grey_color(self):
-        self.get_grey_color().click()
+        self.click_element(self.grey_color)
 
-    def input_input_comment(self):
-        self.get_input_comment().send_keys(data.comment)
+    def input_input_comment(self, comment):
+        self.enter_element(self.input_comment, comment)
 
     def click_btn_next(self):
-        self.get_btn_next().click()
+        self.click_element(self.btn_next)
 
     def click_btn_make_order(self):
-        self.get_btn_make_order().click()
+        self.click_element(self.btn_make_order)
 
     def click_btn_accept_order(self):
-        self.get_btn_accept_order().click()
+        self.click_element(self.btn_accept_order)
 
     # Metods
     def fill_form_order_black_samocat(self, phone):
-        self.input_input_name()
-        self.input_input_surname()
-        self.input_input_address()
+        self.input_input_name(data.name)
+        self.input_input_surname(data.surname)
+        self.input_input_address(data.address)
         self.click_open_list_metro_station()
         self.click_select_metro_station()
         self.input_input_phone(phone)
         self.click_btn_next()
-        self.input_input_date_arrival()
+        self.input_input_date_arrival(data.date_arrival)
         self.click_open_menu_time()
         self.click_select_time_order()
         self.click_black_color()
-        self.input_input_comment()
+        self.input_input_comment(data.comment)
         self.click_btn_make_order()
         self.click_btn_accept_order()
 
     def fill_form_order_grey_samocat(self, phone):
-        self.input_input_name()
-        self.input_input_surname()
-        self.input_input_address()
+        self.input_input_name(data.name)
+        self.input_input_surname(data.surname)
+        self.input_input_address(data.address)
         self.click_open_list_metro_station()
         self.click_select_metro_station()
         self.input_input_phone(phone)
         self.click_btn_next()
-        self.input_input_date_arrival()
+        self.input_input_date_arrival(data.date_arrival)
         self.click_open_menu_time()
         self.click_select_time_order()
         self.click_black_color()
-        self.input_input_comment()
+        self.input_input_comment(data.comment)
         self.click_btn_make_order()
         self.click_btn_accept_order()
 
-    def check_success_order(self):
-        self.is_element_present(By.XPATH, self.assert_success_text)
+    def assert_success_order(self):
+        self.is_element_present(self.assert_success_text)

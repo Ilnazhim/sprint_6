@@ -1,30 +1,30 @@
 import allure
+import pytest
 from pages.main_page import MainPage
-from src import urls, assertions
+from src import urls, assertions, data
 
 
 @allure.suite("Тесты по проверки текстов в блоке Вопросы о важном")
 class TestQuestions:
 
+    @pytest.mark.parametrize('answer, assert_answer', [MainPage.important_answer_1, assertions.assert_important_answer_1])
     @allure.title("Проверка текста в вопросе 1")
-    def test_check_important_question_1(self, browser):
+    def test_check_important_question_1(self, browser, answer, assert_answer):
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на вопрос"):
             mp.click_important_question_1()
         with allure.step("Сравнение ФР и ОР"):
-            assert mp.get_important_answer_1() == assertions.assert_important_answer_1
+            mp.assert_word(answer, assert_answer)
 
     @allure.title("Проверка текста в вопросе 2")
     def test_check_important_question_2(self, browser):
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на вопрос"):
@@ -37,7 +37,6 @@ class TestQuestions:
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на вопрос"):
@@ -50,7 +49,6 @@ class TestQuestions:
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на вопрос"):
@@ -63,7 +61,6 @@ class TestQuestions:
         with allure.step("Открытие браузера"):
             mp = MainPage(browser)
             mp.open(urls.URL)
-            browser.maximize_window()
         with allure.step("Клик на согласие с куками"):
             mp.click_accept_cookies()
         with allure.step("Клик на вопрос"):
